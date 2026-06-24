@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "name": "Dark 70% Nicaragua",
+    "price": 12.00,
+    "origin": "Nicaragua",
+    "cacao": 70,
+    "tastingNotes": "Dark cherry, toasted almond, lingering cocoa",
+    "description": "A bold single‑origin bar from the volcanic soils of Nicaragua. Intense and complex.",
+    "image": "/images/nicaragua.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Milk 45% Madagascar",
+    "price": 11.50,
+    "origin": "Madagascar",
+    "cacao": 45,
+    "tastingNotes": "Caramel, vanilla, creamy milk chocolate",
+    "description": "Smooth and fruity with a hint of red fruit. A crowd‑pleaser.",
+    "image": "/images/madagascar.jpg"
+  },
+  {
+    "id": "3",
+    "name": "White 33% Ecuador",
+    "price": 13.00,
+    "origin": "Ecuador",
+    "cacao": 33,
+    "tastingNotes": "Honey, milk, white flower",
+    "description": "Sweet and delicate with a silky texture. Made with single‑origin cocoa butter.",
+    "image": "/images/ecuador.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Dark 85% Peru",
+    "price": 15.00,
+    "origin": "Peru",
+    "cacao": 85,
+    "tastingNotes": "Espresso, blackberry, dark chocolate",
+    "description": "For the purist. Deep and intense with a long, satisfying finish.",
+    "image": "/images/peru.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Milk & Sea Salt 40%",
+    "price": 12.50,
+    "origin": "France",
+    "cacao": 40,
+    "tastingNotes": "Salted caramel, butter, toasted bread",
+    "description": "A modern classic with hand‑harvested fleur de sel.",
+    "image": "/images/seasalt.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Dark 68% Guatemala",
+    "price": 14.00,
+    "origin": "Guatemala",
+    "cacao": 68,
+    "tastingNotes": "Cinnamon, dried fruit, rich cocoa",
+    "description": "Warm and spicy. A tribute to the Maya tradition.",
+    "image": "/images/guatemala.jpg"
+  }
+]

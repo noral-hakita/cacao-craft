@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* ── Define your brand's design tokens ── */
+@theme {
+  /* Colours */
+  --color-brand-gold: #b8965a;
+  --color-brand-goldLight: #d4b07a;
+  --color-brand-cream: #f0e8d8;
+  --color-brand-dark: #060402;
+  --color-brand-muted: rgba(240, 232, 216, 0.55);
+  --color-brand-border: rgba(184, 150, 90, 0.18);
+
+  /* Font families */
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Jost', sans-serif;
+}
+
+/* ── Base layer overrides ── */
+@layer base {
+  * {
+    border-color: var(--color-brand-border);
+  }
+  body {
+    background-color: var(--color-brand-dark);
+    color: var(--color-brand-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+  }
+}
+
+/* ── Optional: Custom utility classes ── */
+@layer utilities {
+  /* If you want to keep using @apply, you can now define utilities here */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
