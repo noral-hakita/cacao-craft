@@ -35,7 +35,8 @@ export default function ParticlesBackground() {
     }
 
     function draw() {
-      ctx.clearRect(0, 0, width, height)
+      // Use non-null assertion because ctx is guaranteed by the check above
+      ctx!.clearRect(0, 0, width, height)
 
       particles.forEach((p) => {
         p.y += p.speed
@@ -43,10 +44,10 @@ export default function ParticlesBackground() {
           p.y = -5
           p.x = Math.random() * width
         }
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(184, 150, 90, ${p.opacity})`
-        ctx.fill()
+        ctx!.beginPath()
+        ctx!.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+        ctx!.fillStyle = `rgba(184, 150, 90, ${p.opacity})`
+        ctx!.fill()
       })
 
       requestAnimationFrame(draw)
