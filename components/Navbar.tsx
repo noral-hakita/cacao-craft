@@ -5,7 +5,6 @@ import { ShoppingBag } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export default function Navbar() {
-  // Use state to track if we're on the client
   const [isClient, setIsClient] = useState(false)
   const count = useCartStore((state) => state.getItemCount())
 
@@ -20,19 +19,23 @@ export default function Navbar() {
           Cacao <span className="text-brand-gold">&amp;</span> Craft
         </Link>
 
-        <div className="flex items-center gap-6">
+        <ul className="hidden md:flex items-center gap-8 list-none">
+          <li><Link href="/products" className="text-sm uppercase tracking-widest text-brand-cream/60 hover:text-brand-gold transition">Collection</Link></li>
+          <li><a href="/#story" className="text-sm uppercase tracking-widest text-brand-cream/60 hover:text-brand-gold transition">Story</a></li>
+        </ul>
+
+        <div className="flex items-center gap-4">
           <Link href="/cart" className="relative">
             <ShoppingBag className="w-5 h-5 text-brand-cream/70 hover:text-brand-gold transition" />
-            {/* Only show badge on the client side */}
             {isClient && count > 0 && (
               <span className="absolute -top-2 -right-2 bg-brand-gold text-brand-dark text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center">
                 {count}
               </span>
             )}
           </Link>
-          <button className="text-sm uppercase tracking-widest text-brand-cream/70 hover:text-brand-gold border border-brand-border px-4 py-2 transition">
-            Reserve
-          </button>
+          <Link href="/products" className="hidden sm:inline-block bg-brand-gold text-brand-dark px-4 py-2 text-xs uppercase tracking-widest font-medium hover:bg-brand-goldLight transition">
+            Shop
+          </Link>
         </div>
       </div>
     </nav>

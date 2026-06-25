@@ -1,7 +1,9 @@
 'use client'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useCartStore } from '@/store/cartStore'
 import { Minus, Plus, X, ShoppingBag } from 'lucide-react'
+import { encodeImagePath } from '@/lib/utils'
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, getTotal, clearCart } = useCartStore()
@@ -15,8 +17,8 @@ export default function CartPage() {
           <ShoppingBag className="w-16 h-16 text-brand-cream/20" />
           <h2 className="font-serif text-4xl">Your cart is empty</h2>
           <p className="text-brand-cream/50">Looks like you haven't added any chocolate bars yet.</p>
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="inline-block mt-4 text-brand-gold border-b border-brand-gold/40 hover:border-brand-gold transition"
           >
             Continue Shopping
@@ -34,9 +36,15 @@ export default function CartPage() {
       <div className="divide-y divide-brand-border">
         {items.map((item) => (
           <div key={item.id} className="py-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            {/* Product image placeholder */}
-            <div className="w-20 h-20 bg-brand-dark/50 border border-brand-border flex items-center justify-center text-brand-cream/10 text-2xl font-serif flex-shrink-0">
-              {item.name.charAt(0)}
+            {/* Product image */}
+            <div className="w-20 h-20 bg-brand-dark/50 border border-brand-border flex items-center justify-center overflow-hidden relative flex-shrink-0">
+              <Image
+                src={encodeImagePath(item.image)}
+                alt={item.name}
+                fill
+                className="object-cover"
+                sizes="80px"
+              />
             </div>
 
             {/* Product info */}
@@ -69,8 +77,8 @@ export default function CartPage() {
               <span className="w-20 text-right font-light">
                 ${(item.price * item.quantity).toFixed(2)}
               </span>
-              <button 
-                onClick={() => removeItem(item.id)} 
+              <button
+                onClick={() => removeItem(item.id)}
                 className="text-brand-cream/30 hover:text-brand-gold transition"
                 aria-label="Remove item"
               >

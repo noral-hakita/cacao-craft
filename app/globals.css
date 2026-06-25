@@ -1,21 +1,17 @@
 @import "tailwindcss";
 
-/* ── Define your brand's design tokens ── */
 @theme {
-  /* Colours */
   --color-brand-gold: #b8965a;
   --color-brand-goldLight: #d4b07a;
   --color-brand-cream: #f0e8d8;
   --color-brand-dark: #060402;
   --color-brand-muted: rgba(240, 232, 216, 0.55);
   --color-brand-border: rgba(184, 150, 90, 0.18);
-
-  /* Font families */
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Jost', sans-serif;
 }
 
-/* ── Base layer overrides ── */
+/* ── Base styles ── */
 @layer base {
   * {
     border-color: var(--color-brand-border);
@@ -32,10 +28,370 @@
   }
 }
 
-/* ── Optional: Custom utility classes ── */
-@layer utilities {
-  /* If you want to keep using @apply, you can now define utilities here */
-  .text-balance {
-    text-wrap: balance;
-  }
+/* ── PRE‑LOADER STYLES ────────────────────────────────────────────── */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--color-brand-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), visibility 1s;
+}
+#loader.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-logo {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-brand-gold);
+}
+.loader-counter {
+  font-family: var(--font-serif);
+  font-size: 4.5rem;
+  font-weight: 300;
+  color: rgba(184, 150, 90, 0.15);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+#loaderCount {
+  color: var(--color-brand-gold);
+  transition: color 0.3s;
+}
+.loader-bar-wrap {
+  width: 260px;
+  height: 1px;
+  background: rgba(184, 150, 90, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #8a6e3e, var(--color-brand-gold), #d4b07a);
+  width: 0%;
+  transition: width 0.08s linear;
+}
+.loader-text {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(184, 150, 90, 0.4);
+  min-height: 14px;
+  text-align: center;
+}
+
+/* ── CUSTOM VERTICAL SCROLLBAR ──────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-dark);
+  border-left: 1px solid rgba(184, 150, 90, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #8a6e3e, var(--color-brand-gold));
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-gold);
+}
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-brand-gold) var(--color-brand-dark);
+}
+
+/* ── HORIZONTAL PROGRESS BAR ────────────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(to right, #8a6e3e, var(--color-brand-gold), #d4b07a);
+  z-index: 9999;
+  transition: width 0.05s ease-out;
+  will-change: width;
+}
+
+/* ── ROTATING HERO ANIMATIONS ──────────────────────────────────────── */
+.hero-rotate-container {
+  perspective: 1200px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-rotate-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.hero-rotate-inner.flipped {
+  transform: rotateX(-18deg) translateY(5%);
+}
+/* Carousel items inside hero */
+.chocolate-carousel {
+  position: absolute;
+  width: 120px;
+  height: 160px;
+  transform-style: preserve-3d;
+  animation: rotateCarousel 16s linear infinite;
+}
+.chocolate-carousel-item {
+  position: absolute;
+  width: 100px;
+  height: 130px;
+  left: 50%;
+  top: 50%;
+  margin-left: -50px;
+  margin-top: -65px;
+  background: rgba(184, 150, 90, 0.05);
+  border: 1px solid rgba(184, 150, 90, 0.15);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 0.7rem;
+  color: rgba(240, 232, 216, 0.3);
+  text-align: center;
+  padding: 12px;
+  backdrop-filter: blur(4px);
+  backface-visibility: hidden;
+}
+@keyframes rotateCarousel {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+/* ── FALLING PARTICLES ──────────────────────────────────────────────── */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── ACCORDION STYLES ──────────────────────────────────────────────── */
+.accordion {
+  border-bottom: 1px solid var(--color-brand-border);
+}
+.accordion-trigger {
+  width: 100%;
+  padding: 16px 0;
+  background: transparent;
+  border: none;
+  color: var(--color-brand-cream);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s;
+}
+.accordion-trigger:hover {
+  color: var(--color-brand-gold);
+}
+.accordion-trigger::after {
+  content: '+';
+  font-size: 1.2rem;
+  color: var(--color-brand-gold);
+  transition: transform 0.3s;
+}
+.accordion-trigger.open::after {
+  transform: rotate(45deg);
+}
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.4s;
+}
+.accordion-content.open {
+  max-height: 500px;
+  padding-bottom: 20px;
+}
+.accordion-content p {
+  font-size: 0.82rem;
+  color: rgba(240, 232, 216, 0.55);
+  line-height: 1.8;
+}
+
+/* ── CUSTOM UTILITIES ────────────────────────────────────────────────── */
+.eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--color-brand-gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-brand-gold);
+  flex-shrink: 0;
+}
+.sec-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--color-brand-cream);
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+.sec-title em {
+  font-style: italic;
+  color: var(--color-brand-gold);
+  font-weight: 300;
+}
+.sec-body {
+  font-size: 0.86rem;
+  color: rgba(240, 232, 216, 0.55);
+  line-height: 2.4;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.gold-rule {
+  width: 40px;
+  height: 1px;
+  background: var(--color-brand-gold);
+  margin: 40px 0;
+  opacity: 0.5;
+}
+.stat-row {
+  display: flex;
+  gap: 56px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.stat-item {
+  position: relative;
+}
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: 20px;
+  height: 1px;
+  background: var(--color-brand-gold);
+  opacity: 0.4;
+}
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--color-brand-cream);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.stat-num span {
+  font-style: italic;
+  color: var(--color-brand-gold);
+  font-size: 1.9rem;
+  margin-left: 3px;
+}
+.stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(240, 232, 216, 0.4);
+  margin-top: 8px;
+}
+
+/* ── FOOTER STYLES ───────────────────────────────────────────────────── */
+.f-wordmark {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-brand-cream);
+  display: block;
+  margin-bottom: 12px;
+}
+.f-wordmark span {
+  color: var(--color-brand-gold);
+}
+.f-tagline {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: rgba(240, 232, 216, 0.4);
+  font-family: var(--font-serif);
+  display: block;
+  margin-bottom: 32px;
+}
+.f-col h4 {
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--color-brand-gold);
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.f-col ul {
+  list-style: none;
+}
+.f-col li {
+  margin-bottom: 14px;
+}
+.f-col a {
+  font-size: 0.82rem;
+  color: rgba(240, 232, 216, 0.45);
+  text-decoration: none;
+  transition: color 0.3s, padding-left 0.3s;
+  display: block;
+  position: relative;
+}
+.f-col a::before {
+  content: '—';
+  position: absolute;
+  left: -20px;
+  opacity: 0;
+  transition: opacity 0.3s, left 0.3s;
+  color: var(--color-brand-gold);
+  font-size: 0.7rem;
+}
+.f-col a:hover {
+  color: var(--color-brand-cream);
+  padding-left: 8px;
+}
+.f-col a:hover::before {
+  opacity: 1;
+  left: -12px;
+}
+
+/* ── REVEAL ANIMATIONS ──────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1), transform 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
+import Loader from '@/components/Loader'
+import ParticlesBackground from '@/components/ParticlesBackground'
 
 export const metadata: Metadata = {
   title: 'Cacao & Craft – Artisanal Chocolate',
@@ -21,9 +24,13 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-brand-dark text-brand-cream font-sans antialiased">
+        <Loader />
+        <ParticlesBackground />
+        <div id="scroll-progress"></div>
         <Navbar />
-        <main className="pt-16">{children}</main> {/* pt-16 offsets the fixed navbar */}
+        <main className="pt-16">{children}</main>
+        <Footer />
       </body>
     </html>
   )
-}
+} 
